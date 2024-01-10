@@ -31,6 +31,7 @@ class GenAi :
         # self.to_markdown(response.text)
         return( response.text)
         
+        
     def stream_chat(self,message):
         genai.configure(api_key=GOOGLE_API_KEY)
         model = genai.GenerativeModel('gemini-pro')
