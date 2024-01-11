@@ -37,7 +37,8 @@ class GenAi :
         model = genai.GenerativeModel('gemini-pro')
         response = model.generate_content(message, stream=True)
         for chunk in response:
-            return(chunk.text)  
+            yield chunk.text  
+        print(type(response))
             
 
 
