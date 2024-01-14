@@ -11,6 +11,10 @@ from rest_framework.decorators import action
 
 
 
+def home(request):
+
+    return render(request, "sample1.html")
+
 
 class RestApiChat(APIView):
     serializer_class = ChatSerializer
@@ -22,6 +26,7 @@ class RestApiChat(APIView):
         serializer = ChatSerializer(data =request.data)
         if serializer.is_valid():
             obj = GenAi()
+            message=serializer.validated_data["message"]
             response =obj.chat(message=serializer.validated_data["message"])
             print(response)
             return Response({"response":response},status=status.HTTP_200_OK)

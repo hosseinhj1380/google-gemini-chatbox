@@ -28,6 +28,7 @@ class GenAi :
         model = genai.GenerativeModel('gemini-pro')
         chat = model.start_chat(history=[])
         response = chat.send_message(str(message))
+        print(response)
         # self.to_markdown(response.text)
         return( response.text)
         
