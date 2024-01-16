@@ -8,12 +8,13 @@
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
-            margin: 0;
+            marginTop: 100;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            {% comment %} height: 100vh; {% endcomment %}
+            display:"relative"
         }
 
         .container {
@@ -21,7 +22,7 @@
             {% comment %} max-width: 400px; {% endcomment %}
             margin-top: 25px;
             margin-right: 20px;
-            margin-bottom: 20px;
+            {% comment %} margin-bottom: 20px; {% endcomment %}
             margin-left: 20px;
             background-color: #fff;
             padding: 20px;
@@ -70,6 +71,8 @@
     </style>
 </head>
 <body>
+
+    
 
 <div class="container">
     <h2>Simple Chat App google Gemini</h2>
