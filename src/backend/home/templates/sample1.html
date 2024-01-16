@@ -73,7 +73,12 @@
 
 <div class="container">
     <h2>Simple Chat App google Gemini</h2>
-    <code id="responseContainer" ,class ="!whitespace-pre hljs language-python"></code>
+    {% comment %} <code id="responseContainer" ,class ="!whitespace-pre hljs language-python"></code>
+     {% endcomment %}
+    <pre class="dark-scroll-bar" style="background: rgb(40, 44, 52); color: rgb(171, 178, 191); text-shadow: rgba(0, 0, 0, 0.3) 0px 1px; font-family: Menlo, Monaco, &quot;Courier New&quot;, monospace; direction: ltr; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; line-height: 1.5; tab-size: 2; hyphens: none; padding: 1em; margin: 0px; overflow: auto; border-radius: 8px; font-size: 14px; font-weight: normal;">
+        <code id="responseContainer" , class="language-python" style="background: rgb(40, 44, 52); color: rgb(171, 178, 191); text-shadow: rgba(0, 0, 0, 0.3) 0px 1px; font-family: &quot;Fira Code&quot;, &quot;Fira Mono&quot;, Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace; direction: ltr; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; line-height: 1.5; tab-size: 2; hyphens: none;">
+
+    </code></pre>
     <textarea id="userMessage" rows="4" placeholder="Type your message"></textarea>
     <button onclick="sendMessage()">Send</button>
 </div>
@@ -83,7 +88,7 @@ function sendMessage() {
     const userMessage = document.getElementById('userMessage').value;
 
     // Make an asynchronous POST request to the backend
-    fetch('http://192.168.20.27:8000/api/v1/rest/chat', {
+    fetch('https://hosseinhj1380.pythonanywhere.com//api/v1/rest/chat', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -106,6 +111,7 @@ function sendMessage() {
         responseContainer.textContent = `Error: ${error.message}`;
     });
 }
+
 </script>
 
 </body>
