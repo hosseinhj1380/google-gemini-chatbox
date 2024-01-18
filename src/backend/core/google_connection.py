@@ -43,3 +43,5 @@ class GenAi :
             
 
 
+obj = GenAi()
+print(obj.chat("hello"))

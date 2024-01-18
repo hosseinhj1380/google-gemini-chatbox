@@ -28,7 +28,7 @@ class RestApiChat(APIView):
             obj = GenAi()
             message=serializer.validated_data["message"]
             response =obj.chat(message=serializer.validated_data["message"])
-            print(response)
+            
             return Response({"response":response},status=status.HTTP_200_OK)
         
         
