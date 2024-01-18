@@ -1,129 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Simple Chat App</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            marginTop: 100;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            {% comment %} height: 100vh; {% endcomment %}
+            display:"relative"
+        }
+
+        .container {
+            text-align: center;
+            {% comment %} max-width: 400px; {% endcomment %}
+            margin-top: 25px;
+            margin-right: 20px;
+            {% comment %} margin-bottom: 20px; {% endcomment %}
+            margin-left: 20px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width : 1500px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        code {
+            display: block;
+            white-space: pre-wrap;
+            background-color: #CFCCCB;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            {% comment %} width :600px; {% endcomment %}
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Simple Chat App</h1>
-    </div>
-    <div class="chat-box">
-      <div class="messages">
-        <div class="message">
-          <p>Hello! How can I assist you today?</p>
-        </div>
-      </div>
-      <div class="input-box">
-        <input type="text" placeholder="Type your message">
-        <button>Send</button>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
 
-CSS:
-/* CSS for Simple Chat App */
+    
 
-/* Global styles */
+<div class="container">
+    <h2>Simple Chat App google Gemini</h2>
+    {% comment %} <code id="responseContainer" ,class ="!whitespace-pre hljs language-python"></code>
+     {% endcomment %}
+    <pre class="dark-scroll-bar" style="background: rgb(40, 44, 52); color: rgb(171, 178, 191); text-shadow: rgba(0, 0, 0, 0.3) 0px 1px; font-family: Menlo, Monaco, &quot;Courier New&quot;, monospace; direction: ltr; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; line-height: 1.5; tab-size: 2; hyphens: none; padding: 1em; margin: 0px; overflow: auto; border-radius: 8px; font-size: 14px; font-weight: normal;">
+        <code id="responseContainer" , class="language-python" style="background: rgb(40, 44, 52); color: rgb(171, 178, 191); text-shadow: rgba(0, 0, 0, 0.3) 0px 1px; font-family: &quot;Fira Code&quot;, &quot;Fira Mono&quot;, Menlo, Consolas, &quot;DejaVu Sans Mono&quot;, monospace; direction: ltr; text-align: left; white-space: pre; word-spacing: normal; word-break: normal; line-height: 1.5; tab-size: 2; hyphens: none;">
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f2f2f2;
+    </code></pre>
+    <textarea id="userMessage" rows="4" placeholder="Type your message"></textarea>
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+function sendMessage() {
+    const userMessage = document.getElementById('userMessage').value;
+
+    // Make an asynchronous POST request to the backend
+    fetch('https://hosseinhj1380.pythonanywhere.com//api/v1/rest/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userMessage }),
+    })
+    .then(response => response.json())
+    .then(jsonResponse => {
+        // Extract the value from the "response" key
+        const valueToShow = jsonResponse.response;
+
+        // Display the extracted value in the responseContainer code block
+        const responseContainer = document.getElementById('responseContainer');
+        responseContainer.textContent = valueToShow;
+    })
+    .catch(error => {
+        // Handle and display errors
+        console.error(error);
+        const responseContainer = document.getElementById('responseContainer');
+        responseContainer.textContent = `Error: ${error.message}`;
+    });
 }
 
-/* Header styles */
-
-.header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-}
-
-.header h1 {
-  margin: 0;
-  padding: 0;
-}
-
-/* Chat box styles */
-
-.chat-box {
-  width: 400px;
-  margin: 0 auto;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.messages {
-  height: 300px;
-  overflow-y: auto;
-}
-
-.message {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #fff;
-}
-
-.message p {
-  margin: 0;
-  padding: 0;
-}
-
-/* Input box styles */
-
-.input-box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.input-box input {
-  width: 300px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.input-box button {
-  padding: 10px;
-  border: none;
-  background-color: #333;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-JavaScript:
-// JavaScript for Simple Chat App
-
-// Get the elements
-const messages = document.querySelector('.messages');
-const inputBox = document.querySelector('.input-box');
-const inputField = document.querySelector('.input-box input');
-const sendButton = document.querySelector('.input-box button');
-
-// Create a new message
-const createMessage = (text) => {
-  const message = document.createElement('div');
-  message.classList.add('message');
-  message.innerHTML = `<p>${text}</p>`;
-  messages.appendChild(message);
-};
-
-// Handle the send button click
-sendButton.addEventListener('click', () => {
-  // Get the message text
-  const text = inputField.value;
-
-  // Create a new message
-  createMessage(text);
-
-  // Clear the input field
-  inputField.value = '';
-}); 
+</script>
