@@ -2,7 +2,7 @@ import pathlib
 import textwrap
 
 import google.generativeai as genai
-
+import PIL.Image
 # Used to securely store your API key
 # from google.colab import
 from dotenv import load_dotenv
@@ -26,7 +26,8 @@ class GenAi :
     def chat(self,message):
         genai.configure(api_key=GOOGLE_API_KEY)
         model = genai.GenerativeModel('gemini-pro')
-        chat = model.start_chat(history=[])
+        
+        print(chat.history)
         response = chat.send_message(str(message))
         print(response)
         # self.to_markdown(response.text)
@@ -40,8 +41,10 @@ class GenAi :
         for chunk in response:
             yield chunk.text  
         print(type(response))
+        
+    
             
 
 
 obj = GenAi()
-print(obj.chat("hello"))
+print(obj.chat(message="hello"))
